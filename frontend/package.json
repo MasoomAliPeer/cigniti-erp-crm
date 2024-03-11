@@ -3,7 +3,7 @@
   "version": "4.0.0-beta.1",
   "engines": {
     "npm": "10.2.4",
-    "node": "18.19.1"
+    "node": "20.11.1"
   },
   "type": "module",
   "dependencies": {
@@ -26,7 +26,7 @@
     "redux": "^5.0.1",
     "reselect": "^5.1.0",
     "shortid": "^2.2.16",
-    "vite": "^5.1.4"
+    "vite": "^5.1.5"
   },
   "scripts": {
     "dev": "vite",
