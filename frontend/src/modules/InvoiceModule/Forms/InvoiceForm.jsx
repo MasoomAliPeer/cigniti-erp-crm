@@ -14,6 +14,7 @@ import { selectFinanceSettings } from '@/redux/settings/selectors';
 import { useDate, useMoney } from '@/settings';
 import useLanguage from '@/locale/useLanguage';
 import { useSelector } from 'react-redux';
+import { generateInvoiceNumber } from '@/utils/helpers';
 
 export default function InvoiceForm({ subTotal = 0, current = null }) {
   const { last_invoice_number } = useSelector(selectFinanceSettings);
@@ -35,7 +36,13 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
   const [taxTotal, setTaxTotal] = useState(0);
   const [disc, setDiscount] = useState(0);
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
-  const [lastNumber, setLastNumber] = useState(() => last_invoice_number + 1);
+  // const [lastNumber, setLastNumber] = useState(() => last_invoice_number + 1);
+  const [lastNumber, setLastNumber] = useState(() => {
+    if (last_invoice_number === undefined || last_invoice_number === 0) {
+      return generateInvoiceNumber();
+    }
+    return last_invoice_number + 1;
+  });
 
   const handelTaxChange = (value) => {
     setTaxRate(value / 100);
@@ -69,7 +76,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
   return (
     <>
       <Row gutter={[12, 0]}>
-        <Col className="gutter-row" span={8}>
+        <Col className="gutter-row" span={6}>
           <Form.Item
             name="client"
             label={translate('Client')}
@@ -89,9 +96,9 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
             />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={3}>
+        <Col className="gutter-row" span={4}>
           <Form.Item
-            label={translate('number')}
+            label={translate('Inv. No.')}
             name="number"
             initialValue={lastNumber}
             rules={[
@@ -100,7 +107,8 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
               },
             ]}
           >
-            <Input style={{ width: '100%' }} />
+            <Input style={{ width: '100%' }} readOnly />
+            {/* ={lastNumber !== undefined} */}
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={3}>

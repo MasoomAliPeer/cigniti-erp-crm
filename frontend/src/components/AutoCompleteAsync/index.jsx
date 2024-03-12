@@ -36,7 +36,6 @@ export default function AutoCompleteAsync({
   const navigate = useNavigate();
 
   const handleSelectChange = (newValue) => {
-    alert('Testing Alert');
     isUpdating.current = false;
     // setCurrentValue(value[outputValue] || value); // set nested value or value
     // onChange(newValue[outputValue] || newValue);
@@ -85,7 +84,6 @@ export default function AutoCompleteAsync({
   }, [debouncedValue]);
 
   const onSearch = (searchText) => {
-    alert('onSearch');
     isSearching.current = true;
     setSearching(true);
     // setOptions([]);
@@ -105,8 +103,6 @@ export default function AutoCompleteAsync({
   useEffect(() => {
     // this for update Form , it's for setField
     if (value && isUpdating.current) {
-      alert('isUpdating');
-
       setOptions([value]);
       setCurrentValue(value[outputValue] || value); // set nested value or value
       onChange(value[outputValue] || value);

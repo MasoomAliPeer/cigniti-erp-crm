@@ -105,6 +105,34 @@ export function formatDatetime(param) {
   return formatDate(param) + ' ' + time;
 }
 
+// Function to generate invoice number
+export function generateInvoiceNumber() {
+  var prefix = 'Inv-';
+  var now = new Date();
+  var year = now.getFullYear().toString().slice(-2);
+  var month = (now.getMonth() + 1).toString().padStart(2, '0');
+  var day = now.getDate().toString().padStart(2, '0');
+  var randomNumber = Math.floor(Math.random() * 1000)
+    .toString()
+    .padStart(3, '0');
+  var invoiceNumber = prefix + year + month + day + randomNumber;
+  return invoiceNumber;
+}
+
+// Function to generate invoice number
+export function generatePaymentId() {
+  var prefix = 'Pay-';
+  var now = new Date();
+  var year = now.getFullYear().toString().slice(-2);
+  var month = (now.getMonth() + 1).toString().padStart(2, '0');
+  var day = now.getDate().toString().padStart(2, '0');
+  var randomNumber = Math.floor(Math.random() * 1000)
+    .toString()
+    .padStart(3, '0');
+  var invoiceNumber = prefix + year + month + day + randomNumber;
+  return invoiceNumber;
+}
+
 /*
   Regex to validate phone number format
 */

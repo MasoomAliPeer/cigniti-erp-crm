@@ -2,9 +2,12 @@ import { Tag, Divider, Row, Col, Spin, Tooltip } from 'antd';
 import { useMoney } from '@/settings';
 import { selectMoneyFormat } from '@/redux/settings/selectors';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import useLanguage from '@/locale/useLanguage';
 
 export default function AnalyticSummaryCard({ title, tagColor, data, prefix, isLoading = false }) {
   const { moneyFormatter } = useMoney();
+  const translate = useLanguage();
   const money_format_settings = useSelector(selectMoneyFormat);
   return (
     <Col
@@ -27,7 +30,14 @@ export default function AnalyticSummaryCard({ title, tagColor, data, prefix, isL
               textTransform: 'capitalize',
             }}
           >
-            {title}
+            {/* {title} */}
+            {title === 'Invoices' ? (
+              <Link to="/invoice" style={{ color: 'inherit' }}>
+                {translate('invoices')}
+              </Link>
+            ) : (
+              title
+            )}
           </h3>
         </div>
         <Divider style={{ padding: 0, margin: 0 }}></Divider>

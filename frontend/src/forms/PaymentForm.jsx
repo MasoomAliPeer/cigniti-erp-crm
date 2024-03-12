@@ -6,18 +6,20 @@ import React from 'react';
 import SelectAsync from '@/components/SelectAsync';
 import dayjs from 'dayjs';
 import useLanguage from '@/locale/useLanguage';
+import { generatePaymentId } from '@/utils/helpers';
 
 export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) {
   const translate = useLanguage();
   const { TextArea } = Input;
   const money = useMoney();
   const { dateFormat } = useDate();
+
   return (
     <>
       <Form.Item
         label={translate('Payment No.')}
         name="number"
-        initialValue={1}
+        initialValue={generatePaymentId()}
         rules={[
           {
             required: true,
@@ -25,7 +27,7 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
         ]}
         style={{ width: '50%', float: 'left', paddingRight: '20px' }}
       >
-        <Input style={{ width: '100%' }} />
+        <Input style={{ width: '100%' }} readOnly />
       </Form.Item>
       <Form.Item
         name="date"

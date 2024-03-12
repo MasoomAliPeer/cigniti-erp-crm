@@ -138,7 +138,7 @@ export default function Invoice() {
 
   const dataTableColumns = [
     {
-      title: translate('INV. No.'),
+      title: translate('Inv. No.'),
       dataIndex: 'number',
       defaultSortOrder: 'descend',
       key: 'number',
@@ -172,7 +172,7 @@ export default function Invoice() {
       title: translate('Client'),
       dataIndex: ['client', 'name'],
       key: 'name',
-      ...getColumnSearchProps('name'),
+      sorter: (a, b) => a.number - b.number,
       filters: [
         {
           text: 'AstraZeneca',
@@ -188,6 +188,7 @@ export default function Invoice() {
     {
       title: translate('Date'),
       dataIndex: 'date',
+      sorter: (a, b) => a.date - b.date,
       render: (date) => {
         return dayjs(date).format(dateFormat);
       },
@@ -195,6 +196,7 @@ export default function Invoice() {
     {
       title: translate('Due Date'),
       dataIndex: 'expiredDate',
+      sorter: (a, b) => a.expiredDate - b.expiredDate,
       render: (date) => {
         return dayjs(date).format(dateFormat);
       },
@@ -202,6 +204,7 @@ export default function Invoice() {
     {
       title: translate('Discount'),
       dataIndex: 'discount',
+      sorter: (a, b) => a.discount - b.discount,
       onCell: () => {
         return {
           style: {
@@ -251,6 +254,7 @@ export default function Invoice() {
     {
       title: translate('Status'),
       dataIndex: 'status',
+      sorter: (a, b) => a.status - b.status,
       render: (status) => {
         let tagStatus = tagColor(status);
 
