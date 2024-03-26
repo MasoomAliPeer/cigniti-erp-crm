@@ -27,7 +27,7 @@ export default function PaymentForm({ maxAmount = null, isUpdateForm = false }) 
         ]}
         style={{ width: '50%', float: 'left', paddingRight: '20px' }}
       >
-        <Input style={{ width: '100%' }} readOnly />
+        <Input style={{ width: '100%' }} disabled />
       </Form.Item>
       <Form.Item
         name="date"

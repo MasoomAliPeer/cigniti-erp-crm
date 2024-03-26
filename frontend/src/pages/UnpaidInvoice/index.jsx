@@ -7,7 +7,6 @@ import { SearchOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { tagColor } from '@/utils/statusTagColor';
 import useLanguage from '@/locale/useLanguage';
-import { useLocation } from 'react-router-dom';
 
 export default function Invoice() {
   const translate = useLanguage();
@@ -333,7 +332,7 @@ export default function Invoice() {
     dataTableColumns,
     searchConfig,
     deleteModalLabels,
-    // title: title, // Use currentTitle here
+    title: 'unpaid', // Use currentTitle here
   };
 
   return <InvoiceDataTableModule config={config} />;

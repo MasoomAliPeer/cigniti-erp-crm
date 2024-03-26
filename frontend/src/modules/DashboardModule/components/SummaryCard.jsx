@@ -9,6 +9,14 @@ export default function AnalyticSummaryCard({ title, tagColor, data, prefix, isL
   const { moneyFormatter } = useMoney();
   const translate = useLanguage();
   const money_format_settings = useSelector(selectMoneyFormat);
+
+  // Define a style for the link
+  const linkStyle = {
+    color: '#1890ff', // Change to your desired highlight color
+    textDecoration: 'underline',
+    cursor: 'pointer',
+  };
+
   return (
     <Col
       className="gutter-row"
@@ -32,8 +40,16 @@ export default function AnalyticSummaryCard({ title, tagColor, data, prefix, isL
           >
             {/* {title} */}
             {title === 'Invoices' ? (
-              <Link to="/invoice" style={{ color: 'inherit' }}>
+              <Link to="/invoice" style={linkStyle}>
                 {translate('invoices')}
+              </Link>
+            ) : title === 'Receipts' ? (
+              <Link to="/payment" style={linkStyle}>
+                {translate('Receipts')}
+              </Link>
+            ) : title === 'Unpaid' ? (
+              <Link to="/unpaidinvoice" style={linkStyle}>
+                {translate('Unpaid')}
               </Link>
             ) : (
               title

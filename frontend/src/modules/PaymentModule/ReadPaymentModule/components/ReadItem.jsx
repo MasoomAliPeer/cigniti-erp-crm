@@ -1,27 +1,23 @@
-import { useState, useEffect } from 'react';
-
-import { Button, Row, Col, Descriptions, Statistic, Tag, Divider, Typography } from 'antd';
-import { PageHeader } from '@ant-design/pro-layout';
+import { Button, Col, Descriptions, Divider, Row, Statistic, Tag, Typography } from 'antd';
 import {
-  EditOutlined,
-  FilePdfOutlined,
   CloseCircleOutlined,
-  MailOutlined,
+  EditOutlined,
   ExportOutlined,
+  FilePdfOutlined,
+  MailOutlined,
 } from '@ant-design/icons';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { erp } from '@/redux/erp/actions';
-import useLanguage from '@/locale/useLanguage';
-
-import { generate as uniqueId } from 'shortid';
-
-import { selectCurrentItem } from '@/redux/erp/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
-import { useMoney } from '@/settings';
+import { PageHeader } from '@ant-design/pro-layout';
+import { erp } from '@/redux/erp/actions';
+import { selectCurrentItem } from '@/redux/erp/selectors';
 import { tagColor } from '@/utils/statusTagColor';
+import { generate as uniqueId } from 'shortid';
+import useLanguage from '@/locale/useLanguage';
 import useMail from '@/hooks/useMail';
+import { useMoney } from '@/settings';
 import { useNavigate } from 'react-router-dom';
 
 export default function ReadItem({ config, selectedItem }) {
@@ -105,6 +101,7 @@ export default function ReadItem({ config, selectedItem }) {
             {translate('Download PDF')}
           </Button>,
           <Button
+            danger
             key={`${uniqueId()}`}
             loading={mailInProgress}
             onClick={() => {
@@ -113,6 +110,16 @@ export default function ReadItem({ config, selectedItem }) {
             icon={<MailOutlined />}
           >
             {translate('Send by email')}
+          </Button>,
+          <Button
+            key={`${uniqueId()}`}
+            loading={mailInProgress}
+            onClick={() => {
+              send(currentErp._id);
+            }}
+            icon={<CommentOutlined />}
+          >
+            {translate('Send payment remainder')}
           </Button>,
 
           <Button

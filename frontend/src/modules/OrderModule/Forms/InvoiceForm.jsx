@@ -125,6 +125,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
                 { value: 'draft', label: translate('Draft') },
                 { value: 'pending', label: translate('Pending') },
                 { value: 'sent', label: translate('Sent') },
+                { value: 'compleated', label: translate('Compleated') },
               ]}
             ></Select>
           </Form.Item>

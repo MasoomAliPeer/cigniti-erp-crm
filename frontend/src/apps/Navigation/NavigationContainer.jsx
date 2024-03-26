@@ -84,6 +84,16 @@ function Sidebar({ collapsible, isMobile = false }) {
       label: <Link to={'/invoice'}>{translate('invoices')}</Link>,
     },
     {
+      key: 'unpaidinvoice',
+      icon: <ContainerOutlined />,
+      label: <Link to={'/unpaidinvoice'}>{translate('Unpaid Invoices')}</Link>,
+    },
+    {
+      key: 'uploadinvoice',
+      icon: <ContainerOutlined />,
+      label: <Link to={'/uploadinvoice'}>{translate('Upload invoices')}</Link>,
+    },
+    {
       key: 'quote',
       icon: <FileSyncOutlined />,
       label: <Link to={'/quote'}>{translate('proforma invoices')}</Link>,
@@ -91,7 +101,7 @@ function Sidebar({ collapsible, isMobile = false }) {
     {
       key: 'payment',
       icon: <CreditCardOutlined />,
-      label: <Link to={'/payment'}>{translate('payments')}</Link>,
+      label: <Link to={'/payment'}>{translate('Receipts')}</Link>,
     },
     {
       key: 'credit',

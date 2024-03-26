@@ -107,7 +107,7 @@ export function formatDatetime(param) {
 
 // Function to generate invoice number
 export function generateInvoiceNumber() {
-  var prefix = 'Inv-';
+  var prefix = 'INV-';
   var now = new Date();
   var year = now.getFullYear().toString().slice(-2);
   var month = (now.getMonth() + 1).toString().padStart(2, '0');
@@ -121,7 +121,7 @@ export function generateInvoiceNumber() {
 
 // Function to generate invoice number
 export function generatePaymentId() {
-  var prefix = 'Pay-';
+  var prefix = 'PAY-';
   var now = new Date();
   var year = now.getFullYear().toString().slice(-2);
   var month = (now.getMonth() + 1).toString().padStart(2, '0');

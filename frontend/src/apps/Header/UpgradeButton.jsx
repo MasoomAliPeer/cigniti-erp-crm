@@ -5,10 +5,6 @@ import useLanguage from '@/locale/useLanguage';
 
 // import Notifications from '@/components/Notification';
 
-
-
-
-
 export default function UpgradeButton() {
   const translate = useLanguage();
   const Content = () => {
@@ -18,7 +14,7 @@ export default function UpgradeButton() {
         <Button
           type="primary"
           onClick={() => {
-            window.open(`https://www.idurarapp.com/contact-us/`);
+            window.open(`https://www.cigniti.com/contact-us/`);
           }}
         >
           {translate('Contact us')}
@@ -46,5 +42,5 @@ export default function UpgradeButton() {
 }
 
 //  console.log(
-//    '🚀 Welcome to CIGNITI ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
+//    '🚀 Welcome to CIGNITI ERP CRM! Did you know that we also offer commercial customization services? Contact us at https://www.cigniti.com/ for more information.'
 //  );

@@ -149,6 +149,13 @@ export default function DashboardModule() {
             data={invoiceResult?.total}
           />
           <SummaryCard
+            title={translate('Receipts')}
+            tagColor={'yellow'}
+            prefix={translate('This month')}
+            isLoading={quoteLoading}
+            data={quoteResult?.total}
+          />
+          <SummaryCard
             title={translate('proforma invoices')}
             tagColor={'purple'}
             prefix={translate('This month')}

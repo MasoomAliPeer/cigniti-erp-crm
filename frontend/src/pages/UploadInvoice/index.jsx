@@ -7,7 +7,8 @@ import { SearchOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { tagColor } from '@/utils/statusTagColor';
 import useLanguage from '@/locale/useLanguage';
-import { useLocation } from 'react-router-dom';
+
+// import Highlighter from 'react-highlight-words';
 
 export default function Invoice() {
   const translate = useLanguage();
@@ -139,11 +140,10 @@ export default function Invoice() {
     {
       title: translate('INV. No.'),
       dataIndex: 'number',
+      defaultSortOrder: 'descend',
       key: 'number',
       ...getColumnSearchProps('number'),
-      sorter: (a, b) => a.number.localeCompare(b.number),
-      ellipsis: true,
-
+      sorter: (a, b) => a.number - b.number,
       render: (invNo) => {
         var invNo = invNo.toString();
         if (invNo.includes('INV-')) {
@@ -172,7 +172,7 @@ export default function Invoice() {
       title: translate('Client'),
       dataIndex: ['client', 'name'],
       key: 'name',
-      sorter: true,
+      sorter: (a, b) => a.number - b.number,
       filters: [
         {
           text: 'AstraZeneca',
@@ -188,7 +188,7 @@ export default function Invoice() {
     {
       title: translate('Date'),
       dataIndex: 'date',
-      sorter: (a, b) => a.date.localeCompare(b.date),
+      sorter: (a, b) => a.date - b.date,
       render: (date) => {
         return dayjs(date).format(dateFormat);
       },
@@ -196,7 +196,7 @@ export default function Invoice() {
     {
       title: translate('Due Date'),
       dataIndex: 'expiredDate',
-      sorter: (a, b) => a.expiredDate.localeCompare(b.expiredDate),
+      sorter: (a, b) => a.expiredDate - b.expiredDate,
       render: (date) => {
         return dayjs(date).format(dateFormat);
       },
@@ -254,7 +254,7 @@ export default function Invoice() {
     {
       title: translate('Status'),
       dataIndex: 'status',
-      sorter: (a, b) => a.status.localeCompare(b.status),
+      sorter: (a, b) => a.status - b.status,
       render: (status) => {
         let tagStatus = tagColor(status);
 
@@ -269,7 +269,7 @@ export default function Invoice() {
     {
       title: translate('Document Type'),
       dataIndex: 'documentType',
-      sorter: (a, b) => a.status.localeCompare(b.status),
+      sorter: (a, b) => a.documentType - b.documentType,
       render: (documentType) => {
         let tagStatus = tagColor(documentType);
 
@@ -284,8 +284,7 @@ export default function Invoice() {
     {
       title: translate('Payment'),
       dataIndex: 'paymentStatus',
-      sorter: (a, b) => a.paymentStatus.localeCompare(b.paymentStatus),
-
+      sorter: (a, b) => a.paymentStatus - b.paymentStatus,
       filters: [
         {
           text: 'Unpaid',
@@ -317,10 +316,9 @@ export default function Invoice() {
 
   const Labels = {
     PANEL_TITLE: translate('invoice'),
-    DATATABLE_TITLE: translate('invoice_list'),
-    ADD_NEW_ENTITY: translate('add_new_invoice'),
+    DATATABLE_TITLE: translate('Upload Invoices'),
+    ADD_NEW_ENTITY: translate('Upload Multiple Invoices'),
     ENTITY_NAME: translate('invoice'),
-
     RECORD_ENTITY: translate('record_payment'),
   };
 
@@ -328,12 +326,12 @@ export default function Invoice() {
     entity,
     ...Labels,
   };
+
   const config = {
     ...configPage,
     dataTableColumns,
     searchConfig,
     deleteModalLabels,
-    // title: title, // Use currentTitle here
   };
 
   return <InvoiceDataTableModule config={config} />;

@@ -247,6 +247,7 @@ const lang = {
   download: 'Download',
   draft: 'Draft',
   pending: 'Pending',
+  compleated:'Compleated',
   sent: 'Sent',
   declined: 'Declined',
   accepted: 'Accepted',

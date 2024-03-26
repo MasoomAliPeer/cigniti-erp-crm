@@ -1,29 +1,25 @@
-import { useState, useEffect } from 'react';
-import { Divider } from 'antd';
-
-import { Button, Row, Col, Descriptions, Statistic, Tag } from 'antd';
-import { PageHeader } from '@ant-design/pro-layout';
+import { Button, Col, Descriptions, Row, Statistic, Tag } from 'antd';
 import {
+  CloseCircleOutlined,
   EditOutlined,
   FilePdfOutlined,
-  CloseCircleOutlined,
-  RetweetOutlined,
   MailOutlined,
+  RetweetOutlined,
 } from '@ant-design/icons';
-
-import { useSelector, useDispatch } from 'react-redux';
-import useLanguage from '@/locale/useLanguage';
-import { adavancedCrud } from '@/redux/adavancedCrud/actions';
-
-import { generate as uniqueId } from 'shortid';
-
-import { selectCurrentItem } from '@/redux/adavancedCrud/selectors';
+import { useDate, useMoney } from '@/settings';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
-import { useMoney, useDate } from '@/settings';
+import { Divider } from 'antd';
+import { PageHeader } from '@ant-design/pro-layout';
+import { adavancedCrud } from '@/redux/adavancedCrud/actions';
+import { selectCurrentItem } from '@/redux/adavancedCrud/selectors';
+import { tagColor } from '@/utils/statusTagColor';
+import { generate as uniqueId } from 'shortid';
+import useLanguage from '@/locale/useLanguage';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
-import { tagColor } from '@/utils/statusTagColor';
 
 const Item = ({ item }) => {
   const { moneyFormatter } = useMoney();
@@ -175,6 +171,17 @@ export default function ReadItem({ config, selectedItem }) {
             icon={<MailOutlined />}
           >
             {translate('Send by Email')}
+          </Button>,
+          <Button
+            danger
+            key={`${uniqueId()}`}
+            loading={mailInProgress}
+            onClick={() => {
+              send(currentAdavancedCrud._id);
+            }}
+            icon={<CommentOutlined />}
+          >
+            {translate('Send Payment Remainder')}
           </Button>,
           <Button
             key={`${uniqueId()}`}

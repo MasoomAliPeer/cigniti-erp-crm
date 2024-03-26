@@ -53,6 +53,11 @@ const AppNav = ({ translate }) => [
     label: <Link to={'/invoice'}>{translate('invoice')}</Link>,
   },
   {
+    key: 'uploadinvoice',
+    icon: <ContainerOutlined />,
+    label: <Link to={'/uploadinvoice'}>{translate('Upload invoices')}</Link>,
+  },
+  {
     key: 'quote',
     icon: <FileSyncOutlined />,
     label: <Link to={'/quote'}>{translate('quote')}</Link>,

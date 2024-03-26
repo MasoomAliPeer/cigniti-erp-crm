@@ -6,12 +6,6 @@ import useLanguage from '@/locale/useLanguage';
 
 // import Notifications from '@/components/Notification';
 
-
-
-
-
-
-
 export default function AppsButton() {
   const { state: stateApp, appContextAction } = useAppContext();
   const { app } = appContextAction;
@@ -63,5 +57,5 @@ export default function AppsButton() {
 }
 
 //  console.log(
-//    '🚀 Welcome to CIGNITI ERP CRM! Did you know that we also offer commercial customization services? Contact us at hello@idurarapp.com for more information.'
+//    '🚀 Welcome to CIGNITI ERP CRM! Did you know that we also offer commercial customization services? Contact us at https://www.cigniti.com/ for more information.'
 //  );

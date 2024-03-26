@@ -19,13 +19,21 @@ const paginatedList = async (req, res) => {
     fields.$or.push({ [field]: { $regex: new RegExp(req.query.q, 'i') } });
   }
 
-  //  Query the database for a list of all results
-  const resultsPromise = Model.find({
-    removed: false,
+  const paymentStatus = req.query.paymentStatus || '';
 
+  const query = {
+    removed: false,
     [filter]: equal,
     ...fields,
-  })
+  };
+
+  // Add paymentStatus filter if it's not empty
+  if (paymentStatus !== '') {
+    query.paymentStatus = paymentStatus;
+  }
+
+  //  Query the database for a list of all results
+  const resultsPromise = Model.find(query)
     .skip(skip)
     .limit(limit)
     .sort({ [sortBy]: sortValue })
@@ -33,12 +41,7 @@ const paginatedList = async (req, res) => {
     .exec();
 
   // Counting the total documents
-  const countPromise = Model.countDocuments({
-    removed: false,
-
-    [filter]: equal,
-    ...fields,
-  });
+  const countPromise = Model.countDocuments(query);
 
   // Resolving both promises
   const [result, count] = await Promise.all([resultsPromise, countPromise]);

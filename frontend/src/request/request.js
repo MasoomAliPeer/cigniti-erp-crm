@@ -146,6 +146,27 @@ const request = {
       return errorHandler(error);
     }
   },
+  unPaidlist: async ({ entity, options = {} }) => {
+    try {
+      options.paymentStatus = 'unpaid';
+
+      let query = '?';
+      for (var key in options) {
+        query += key + '=' + options[key] + '&';
+      }
+      query = query.slice(0, -1);
+
+      const response = await axios.get(entity + '/list' + query);
+
+      successHandler(response, {
+        notifyOnSuccess: false,
+        notifyOnFailed: false,
+      });
+      return response.data;
+    } catch (error) {
+      return errorHandler(error);
+    }
+  },
   listAll: async ({ entity, options = {} }) => {
     try {
       let query = '?';

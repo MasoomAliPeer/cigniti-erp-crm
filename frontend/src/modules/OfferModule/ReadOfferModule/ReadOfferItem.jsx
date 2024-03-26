@@ -1,28 +1,24 @@
-import { useState, useEffect } from 'react';
-
-import { Button, Row, Col, Descriptions, Statistic, Tag, Divider } from 'antd';
-import { PageHeader } from '@ant-design/pro-layout';
+import { Button, Col, Descriptions, Divider, Row, Statistic, Tag } from 'antd';
 import {
+  CloseCircleOutlined,
   EditOutlined,
   FilePdfOutlined,
-  CloseCircleOutlined,
-  RetweetOutlined,
   MailOutlined,
+  RetweetOutlined,
 } from '@ant-design/icons';
-
-import { useSelector, useDispatch } from 'react-redux';
-import useLanguage from '@/locale/useLanguage';
-import { erp } from '@/redux/erp/actions';
-
-import { generate as uniqueId } from 'shortid';
-
-import { selectCurrentItem } from '@/redux/erp/selectors';
+import { useDate, useMoney } from '@/settings';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
-import { useMoney, useDate } from '@/settings';
+import { PageHeader } from '@ant-design/pro-layout';
+import { erp } from '@/redux/erp/actions';
+import { selectCurrentItem } from '@/redux/erp/selectors';
+import { tagColor } from '@/utils/statusTagColor';
+import { generate as uniqueId } from 'shortid';
+import useLanguage from '@/locale/useLanguage';
 import useMail from '@/hooks/useMail';
 import { useNavigate } from 'react-router-dom';
-import { tagColor } from '@/utils/statusTagColor';
 
 const Item = ({ item, currentErp }) => {
   const { moneyFormatter } = useMoney();
@@ -169,6 +165,17 @@ export default function ReadOfferItem({ config, selectedItem }) {
             icon={<MailOutlined />}
           >
             {translate('Send by email')}
+          </Button>,
+          <Button
+            danger
+            key={`${uniqueId()}`}
+            loading={mailInProgress}
+            onClick={() => {
+              send(currentErp._id);
+            }}
+            icon={<CommentOutlined />}
+          >
+            {translate('Send payment remainder')}
           </Button>,
           <Button
             key={`${uniqueId()}`}

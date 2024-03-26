@@ -1,4 +1,5 @@
 import { Button, Col, Divider, Form, Input, InputNumber, Row, Select } from 'antd';
+import { useDate, useMoney } from '@/settings';
 import { useEffect, useRef, useState } from 'react';
 
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
@@ -10,11 +11,10 @@ import SelectAsync from '@/components/SelectAsync';
 import SelectCurrency from '@/components/SelectCurrency';
 import calculate from '@/utils/calculate';
 import dayjs from 'dayjs';
+import { generateInvoiceNumber } from '@/utils/helpers';
 import { selectFinanceSettings } from '@/redux/settings/selectors';
-import { useDate, useMoney } from '@/settings';
 import useLanguage from '@/locale/useLanguage';
 import { useSelector } from 'react-redux';
-import { generateInvoiceNumber } from '@/utils/helpers';
 
 export default function InvoiceForm({ subTotal = 0, current = null }) {
   const { last_invoice_number } = useSelector(selectFinanceSettings);
@@ -98,7 +98,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
         </Col>
         <Col className="gutter-row" span={4}>
           <Form.Item
-            label={translate('Inv. No.')}
+            label={translate('INV. No.')}
             name="number"
             initialValue={lastNumber}
             rules={[
@@ -107,7 +107,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
               },
             ]}
           >
-            <Input style={{ width: '100%' }} readOnly />
+            <Input style={{ width: '100%' }} disabled />
             {/* ={lastNumber !== undefined} */}
           </Form.Item>
         </Col>
@@ -137,13 +137,14 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
                 required: false,
               },
             ]}
-            initialValue={'draft'}
+            initialValue={'pending'}
           >
             <Select
               options={[
                 { value: 'draft', label: translate('Draft') },
                 { value: 'pending', label: translate('Pending') },
                 { value: 'sent', label: translate('Sent') },
+                { value: 'completed', label: translate('Completed') },
               ]}
             ></Select>
           </Form.Item>
@@ -285,7 +286,7 @@ function LoadInvoiceForm({ subTotal = 0, current = null }) {
           </Col>
 
           <Col className="gutter-row" span={5}>
-            <Form.Item name="discount" rules={[{ required: true }]}>
+            <Form.Item name="discount" rules={[{ required: false }]} initialValue={disc}>
               <InputNumber
                 className="moneyInput"
                 onChange={(value) => setDiscount(value)}

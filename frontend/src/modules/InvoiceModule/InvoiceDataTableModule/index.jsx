@@ -1,9 +1,10 @@
+import { CreditCardOutlined } from '@ant-design/icons';
 import { ErpLayout } from '@/layout';
 import ErpPanel from '@/modules/ErpPanelModule';
 import useLanguage from '@/locale/useLanguage';
-import { CreditCardOutlined } from '@ant-design/icons';
 
 export default function InvoiceDataTableModule({ config }) {
+  console.log('config', config);
   const translate = useLanguage();
   return (
     <ErpLayout>
@@ -13,6 +14,11 @@ export default function InvoiceDataTableModule({ config }) {
           {
             label: translate('Record Payment'),
             key: 'recordPayment',
+            icon: <CreditCardOutlined />,
+          },
+          {
+            label: translate('Record Credit Memo'),
+            key: '',
             icon: <CreditCardOutlined />,
           },
         ]}
