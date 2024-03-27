@@ -316,7 +316,7 @@ export default function Invoice() {
 
   const Labels = {
     PANEL_TITLE: translate('invoice'),
-    DATATABLE_TITLE: translate('Upload Invoices'),
+    DATATABLE_TITLE: translate('Upload'),
     ADD_NEW_ENTITY: translate('Upload Multiple Invoices'),
     ENTITY_NAME: translate('invoice'),
     RECORD_ENTITY: translate('record_payment'),

@@ -91,7 +91,7 @@ function Sidebar({ collapsible, isMobile = false }) {
     {
       key: 'uploadinvoice',
       icon: <ContainerOutlined />,
-      label: <Link to={'/uploadinvoice'}>{translate('Upload invoices')}</Link>,
+      label: <Link to={'/uploadinvoice'}>{translate('Upload')}</Link>,
     },
     {
       key: 'quote',

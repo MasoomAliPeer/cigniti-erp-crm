@@ -232,7 +232,7 @@ export default function DataTable({ config, extra = [] }) {
 
   // Conditional rendering based on DATATABLE_TITLE
   const renderPageHeaderExtra = () => {
-    if (DATATABLE_TITLE === 'Upload Invoices') {
+    if (DATATABLE_TITLE === 'Upload') {
       return null; // Return null to not render any extra components
     } else {
       return (
@@ -268,15 +268,17 @@ export default function DataTable({ config, extra = [] }) {
     return (
       <div
         style={{
+          display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          height: '100vh',
+          alignItems: 'center',
+          // height: '100vh',
         }}
       >
         <Form>
           <Select
             showSearch
-            style={{ width: 200 }}
+            style={{ width: 200, margin: 10 }}
             placeholder="Search to Select"
             optionFilterProp="children"
             filterOption={(input, option) => (option?.label ?? '').includes(input)}
@@ -359,7 +361,7 @@ export default function DataTable({ config, extra = [] }) {
         }}
       />
 
-      {DATATABLE_TITLE === 'Upload Invoices' ? (
+      {DATATABLE_TITLE === 'Upload' ? (
         renderUploadInvoicesView()
       ) : (
         <Table
